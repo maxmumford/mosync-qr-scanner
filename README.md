@@ -1,7 +1,7 @@
 MoSync QR Scanner Example Project
 =========
 
-This project is designed to give you a starting point for making a javascript based crossed platform QR code scanner with MoSync.
+This project is designed to give you a starting point for making a javascript based cross platform QR code scanner with MoSync.
 
 You can find the associated tutorial post here:
 

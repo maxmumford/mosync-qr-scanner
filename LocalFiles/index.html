@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=320, user-scalable=yes">
+    <title>QR Code Decoder</title>
+    <script type="text/javascript" charset="utf-8" src="js/wormhole.js"></script>
+
+    <script type="text/javascript" src="js/grid.js"></script>
+    <script type="text/javascript" src="js/version.js"></script>
+    <script type="text/javascript" src="js/detector.js"></script>
+    <script type="text/javascript" src="js/formatinf.js"></script>
+    <script type="text/javascript" src="js/errorlevel.js"></script>
+    <script type="text/javascript" src="js/bitmat.js"></script>
+    <script type="text/javascript" src="js/datablock.js"></script>
+    <script type="text/javascript" src="js/bmparser.js"></script>
+    <script type="text/javascript" src="js/datamask.js"></script>
+    <script type="text/javascript" src="js/rsdecoder.js"></script>
+    <script type="text/javascript" src="js/gf256poly.js"></script>
+    <script type="text/javascript" src="js/gf256.js"></script>
+    <script type="text/javascript" src="js/decoder.js"></script>
+
+    <script type="text/javascript" src="js/QRCode.js"></script>
+    <script type="text/javascript" src="js/findpat.js"></script>
+    <script type="text/javascript" src="js/alignpat.js"></script>
+    <script type="text/javascript" src="js/databr.js"></script>
+    
+</head>
+<body>
+
+<script type="text/javascript">
+
+     var capture = null;
+     var image = null;
+
+     function getImage()
+     {
+         capture = navigator.device.capture;
+         capture.captureImage(getImageSuccess, getImageFailure);
+     }
+
+     function getImageFailure(error){
+        alert('Something went wrong...');
+     }
+
+     function getImageSuccess(img){
+         image = img;
+         decodeImage();
+     }
+    function alertDecodeResult(result){
+        alert(result); 
+     }
+
+     function decodeImage(){
+         imagePath = image[0]['fullPath']
+         qrcode.callback = alertDecodeResult;
+         qrcode.decode(imagePath);
+     }
+</script>
+
+<script type="text/javascript">
+$(document).ready( function() {
+    
+    qrcode.callback = showInfo;
+    $("#btnDecode").click(qrCodeDecoder);
+  })
+  
+  function qrCodeDecoder() {
+    //alert('called');
+    qrcode.decode("images/sample.png");
+  }
+  
+  function showInfo(data) {
+    alert(data);
+  }
+</script>
+</head>
+<body>
+    <button onclick="getImage()">Scan It</button>
+
+</body>
+</html>
